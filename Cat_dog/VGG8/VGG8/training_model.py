@@ -48,23 +48,46 @@ def mix_data(folders, label):
 def build_vgg11_model(input_shape=(224, 224, 3), num_classes=2):
 
     #VGG8
+    # model = Sequential()
+    # model.add(Input(shape=(224, 224, 3)))
+    # model.add(Conv2D(filters=16, kernel_size=(3, 3), activation="relu", padding="same"))
+    # model.add(MaxPool2D(pool_size=(2, 2)))
+
+    # model.add(Conv2D(filters=32, kernel_size=(3, 3), activation="relu", padding="same"))
+    # model.add(MaxPool2D(pool_size=(2, 2)))
+
+    # model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu", padding="same"))
+    # model.add(MaxPool2D(pool_size=(2, 2)))
+
+    # model.add(Conv2D(filters=128, kernel_size=(3, 3), activation="relu", padding="same"))
+    # model.add(MaxPool2D(pool_size=(2, 2)))
+
+    # model.add(Conv2D(filters=128, kernel_size=(3, 3), activation="relu", padding="same"))
+    # model.add(MaxPool2D(pool_size=(2, 2)))
+
+    # model.add(Flatten())
+    # model.add(Dense(units=4096, activation="relu"))
+    # model.add(Dropout(0.2))
+    # model.add(Dense(units=1024, activation="relu"))
+    # model.add(Dropout(0.2))
+    # model.add(Dense(units=num_classes, activation="softmax"))
+    # model.summary()
+
     model = Sequential()
     model.add(Input(shape=(224, 224, 3)))
-    model.add(Conv2D(filters=16, kernel_size=(3, 3), activation="relu", padding="same"))
-    model.add(MaxPool2D(pool_size=(2, 2)))
-
-    model.add(Conv2D(filters=32, kernel_size=(3, 3), activation="relu", padding="same"))
-    model.add(MaxPool2D(pool_size=(2, 2)))
-
     model.add(Conv2D(filters=64, kernel_size=(3, 3), activation="relu", padding="same"))
     model.add(MaxPool2D(pool_size=(2, 2)))
-
     model.add(Conv2D(filters=128, kernel_size=(3, 3), activation="relu", padding="same"))
     model.add(MaxPool2D(pool_size=(2, 2)))
-
-    model.add(Conv2D(filters=128, kernel_size=(3, 3), activation="relu", padding="same"))
+    model.add(Conv2D(filters=256, kernel_size=(3, 3), activation="relu", padding="same"))
+    model.add(Conv2D(filters=256, kernel_size=(3, 3), activation="relu", padding="same"))
     model.add(MaxPool2D(pool_size=(2, 2)))
-
+    model.add(Conv2D(filters=512, kernel_size=(3, 3), activation="relu", padding="same"))
+    model.add(Conv2D(filters=512, kernel_size=(3, 3), activation="relu", padding="same"))
+    model.add(MaxPool2D(pool_size=(2, 2)))
+    model.add(Conv2D(filters=512, kernel_size=(3, 3), activation="relu", padding="same"))
+    model.add(Conv2D(filters=512, kernel_size=(3, 3), activation="relu", padding="same"))
+    model.add(MaxPool2D(pool_size=(2, 2)))
     model.add(Flatten())
     model.add(Dense(units=4096, activation="relu"))
     model.add(Dropout(0.2))
@@ -139,7 +162,7 @@ def scheduler(epoch, lr):
 
 def train_and_save_model(train_x, train_y, test_x, test_y, model_name, epochs=30, unit = 2):
     model = build_vgg11_model(num_classes=unit)
-    model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.0002), metrics=["accuracy"])
+    model.compile(loss='categorical_crossentropy', optimizer=Adam(learning_rate=0.00002), metrics=["accuracy"])
 
     print(f"Training {model_name} model ...")
 

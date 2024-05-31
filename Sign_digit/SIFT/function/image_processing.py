@@ -34,13 +34,17 @@ def extract_visual_features(gray_images):
     
     keypoints = []
     descriptors = []
-
+    i = 1
     for img in gray_images:
         # extract keypoints and descriptors for each image
         img_keypoints, img_descriptors = extractor.detectAndCompute(img, None)
         if img_descriptors is not None:
             keypoints.append(img_keypoints)
             descriptors.append(img_descriptors)
+        else:
+            print(i)
+
+        i+=1
     return keypoints, descriptors
 
 

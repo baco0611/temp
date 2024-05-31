@@ -67,6 +67,8 @@ def process_data(source_folder, destination_folder):
                     flip_folder = os.path.join(destination_folder, "flip", str(folder_index))
                     flipped_image = cv2.flip(image, 1)
                     flip_image_path = os.path.join(flip_folder, f"{file_index}.jpg")
+                    if file_index > 1000:
+                        flipped_image = image
                     cv2.imwrite(flip_image_path, flipped_image)
                     flip_list.append(flipped_image)
 
@@ -96,7 +98,7 @@ def process_data(source_folder, destination_folder):
                     cv2.imwrite(rotate_image_path, rotated_image)
                     rotate_list.append(rotated_image)
                     
-
+                    
                     label.append(folder_index)
                     file_index += 1
 
